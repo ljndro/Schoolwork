@@ -1,0 +1,89 @@
+#Calculo de sueldos empresa
+#Alejandro Castillo
+
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
+
+#Funciones
+def ejecutar():
+      valor1=int(caja1.get())
+      valor2=int(caja2.get())
+      valor1a=int(caja3.get())
+      valor2a=int(caja4.get())
+      afp=str(lista_desplegable.get())
+      salud=str(lista_desplegable2.get())
+      sbruto=float(valor1*valor1a+valor2*valor2a)
+
+      if sbruto >= 200000:
+            bmarzo=sbruto*0.20
+      else:
+            bmarzo=sbruto*0.15
+            
+      if afp=="CUPRUM":
+            rafp=sbruto*0.07
+      elif afp=="MODELO":
+            rafp=sbruto*0.09
+      elif afp=="CAPITAL":
+            rafp=sbruto*0.12
+      elif afp=="PROVIDA":
+            rafp=sbruto*0.13
+
+      if salud=="FONASA":
+            rsalud=sbruto*0.12
+      elif salud=="CONSALUD":
+            rsalud=sbruto*0.13
+      elif salud=="MASVIDA":
+            rsalud=sbruto*0.14
+      elif salud=="BANMEDICA":
+            rsalud=sbruto*0.15
+      
+      sliquido=sbruto-(rafp+rsalud)+bmarzo
+      messagebox.showinfo("Sueldo liquido","SU SUELDO LIQUIDO ES " +str(int(sliquido))+" CLP")
+      
+
+ventana=Tk()
+ventana.title ("SE NEGOCIA, SUELDOS")
+ventana.geometry("300x190")
+
+#etiquetas, cajas de texto y boton
+etiqueta1=ttk.Label(ventana,text="Horas trabajadas")
+etiqueta1.place(x=30,y=20)
+caja1=ttk.Entry(ventana,text="Horas trabajadas")
+caja1.place(x=120,y=20)
+
+etiqueta2=ttk.Label(ventana,text="Horas extra")
+etiqueta2.place(x=30,y=45)
+caja2=ttk.Entry(ventana,text="Horas extra")
+caja2.place(x=120,y=45)
+
+etiqueta3=ttk.Label(ventana,text="Valor horas")
+etiqueta3.place(x=30,y=70)
+caja3=ttk.Entry(ventana,text="Valor horas")
+caja3.place(x=120,y=70)
+
+etiqueta4=ttk.Label(ventana,text="Valor horas extra")
+etiqueta4.place(x=30,y=95)
+caja4=ttk.Entry(ventana,text="Valor horas extra")
+caja4.place(x=120,y=95)
+
+boton1=ttk.Button(ventana,text="EJECUTAR",command=ejecutar)
+boton1.place(x=30,y=170)
+
+#lista desplegable configuracion
+lista_desplegable = ttk.Combobox(ventana,width=17)
+lista_desplegable.place(x=30,y=120)
+lista_desplegable2 = ttk.Combobox(ventana,width=17)
+lista_desplegable2.place(x=30,y=140)
+
+#Opciones
+opciones=("CUPRUM","MODELO","CAPITAL","PROVIDA")
+opciones2=("FONASA","CONSALUD","MASVIDA","BANMEDICA")
+
+#Insertar los valores
+lista_desplegable['values']=opciones
+lista_desplegable2['values']=opciones2
+
+ventana.mainloop()
+
+#Alejandro Castillo 
